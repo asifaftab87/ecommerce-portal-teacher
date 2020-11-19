@@ -23,7 +23,36 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>org.la.ecom.notification.api</groupId>
+			<artifactId>ecommerce-notification-api</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.la.ecom.report.api</groupId>
+			<artifactId>ecommerce-report-api</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.la.ecom.notification.api</groupId>
+			<artifactId>ecommerce-notification-api</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.la.ecom.mysql.api</groupId>
+			<artifactId>ecommerce-mysql-api</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.la.ecom.document.api</groupId>
+			<artifactId>ecommerce-document-api</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<dependency>
+        <groupId>org.apache.tomcat.embed</groupId>
+        <artifactId>tomcat-embed-jasper</artifactId>
+        <scope>provided</scope>
+    </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
