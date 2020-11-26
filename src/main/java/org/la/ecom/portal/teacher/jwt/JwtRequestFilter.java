@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Component
-public class JwtRequestFilter  extends OncePerRequestFilter{
+public class JwtRequestFilter extends OncePerRequestFilter{
 	
 	@Autowired
 	private JwtUtil jwtUtil;
@@ -36,6 +36,26 @@ public class JwtRequestFilter  extends OncePerRequestFilter{
 		
 		String username = null;
 		String jwt = null;
+		
+		//get path
+		String uri = request.getRequestURI();
+		
+		if(uri!=null) {
+			
+			String[] pathArray = uri.split("/");
+			
+			if(pathArray.length>0) {
+				
+				String finalPath = pathArray[pathArray.length-1];
+				
+				//checking if the path is login or registration then allow 
+				//to pass the security
+				if(finalPath.equals("login") || finalPath.equals("registration")) {
+					filterChain.doFilter(request, response);
+					return;
+				}
+			}
+		}
 		
 		if(authorizationHeader==null) {
 			throw new AccessDeniedException("Forbidden");

@@ -1,4 +1,4 @@
-package org.la.ecom.portal.teacher.rest.controller;
+package org.la.ecom.portal.teacher.controller;
 
 import org.la.ecom.mysql.api.dto.AuthenticationRequestDTO;
 import org.la.ecom.mysql.api.dto.UserDTO;
@@ -18,7 +18,7 @@ public class LoginController {
 
 		System.out.println("test login unsecure");
 
-		ModelAndView mav = new ModelAndView("success");
+		ModelAndView mav = new ModelAndView("login");
 
 		return mav;
 	}
@@ -28,7 +28,7 @@ public class LoginController {
 
 		System.out.println("test registration unsecure");
 
-		ModelAndView mav = new ModelAndView("success");
+		ModelAndView mav = new ModelAndView("registration");
 
 		return mav;
 	}
