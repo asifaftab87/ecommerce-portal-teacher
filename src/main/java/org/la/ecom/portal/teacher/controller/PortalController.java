@@ -32,13 +32,13 @@ public class PortalController {
 	Logger log = LoggerFactory.getLogger(PortalController.class);
 	
 	
-	@GetMapping("/registration")
+	@GetMapping("/regisdfasdftration")
 	public ModelAndView view(@ModelAttribute UserDTO userDto) {
 		ModelAndView mav = new ModelAndView("register");
 		return mav;
 	}
 	
-	@PostMapping("/registration")
+	@PostMapping("/reagiaaastration")
 	public ModelAndView registerUser(@ModelAttribute UserDTO userDto) {
 
 		//values of these are not set in view, so we set them in controller
@@ -65,14 +65,14 @@ public class PortalController {
 		return mav;
 	}
 	
-	@GetMapping("/authenticate")
+	@GetMapping("/authenticatffe")
 	public ModelAndView toLoginPage(@ModelAttribute AuthenticationRequestDTO userDto) {
 		ModelAndView mav = new ModelAndView("login");
 		
 		return mav;
 	}
 	
-	@PostMapping("/authenticate")
+	@PostMapping("/aaauthenticate")
 	public ModelAndView loginUser(@ModelAttribute AuthenticationRequestDTO req) {
 		ModelAndView mav = new ModelAndView("login");
 		
@@ -88,14 +88,14 @@ public class PortalController {
 	}
 	
 	
-	@GetMapping("/upload")
+	@GetMapping("/uploaddd")
 	public ModelAndView viewUploadPage() {
 		ModelAndView mav = new ModelAndView("upload");
 		return mav;
 	}
 	
 	//upload
-	@PostMapping("/upload")
+	@PostMapping("/ssupload")
 	public String uploadFiles(@RequestParam("docs") MultipartFile file, RedirectAttributes redirectAttributes, ModelMap modelMap) throws IOException {
 		
 		//MultipartFile is an object that has our file and its metadata details

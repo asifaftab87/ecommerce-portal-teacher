@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class RestTemplateInterceptor implements ClientHttpRequestInterceptor{
 
-	private String authorizationHeader;
+	private String jwt;
 	
-	public void setAuthorizationHeader(String authorizationHeader) {
-		this.authorizationHeader = authorizationHeader;
+	public void setJwt(String jwt) {
+		this.jwt = jwt;
 	}
 	
 	@Override
@@ -23,7 +23,10 @@ public class RestTemplateInterceptor implements ClientHttpRequestInterceptor{
 			throws IOException {
 		
 		HttpRequest wrapper = new HttpRequestWrapper(request);
-		wrapper.getHeaders().set("Authorization", authorizationHeader);
+		if(jwt!=null)
+			wrapper.getHeaders().set("Authorization", "Bearer "+jwt);
+		else if(jwt==null)
+			wrapper.getHeaders().set("Authorization", null);
 		
 		return execution.execute(wrapper, body);
 		

@@ -22,6 +22,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>org.la.ecom.secure.api</groupId>
+			<artifactId>ecommerce-security-api</artifactId>
+			<version>0.1</version>
+		</dependency>
+		<dependency>
 			<groupId>org.la.ecom.notification.api</groupId>
 			<artifactId>ecommerce-notification-api</artifactId>
 			<version>0.1</version>
@@ -50,7 +55,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>

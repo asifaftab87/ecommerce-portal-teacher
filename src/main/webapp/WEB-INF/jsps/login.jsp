@@ -88,7 +88,7 @@
 
     <body>
         <h2 style="text-align:center">Log-in</h2>
-        <form action="/authenticate" method="post" modelAttribute="req">
+        <form action="/teacher/login" method="post" modelAttribute="authRequest">
             <div class="div2">
                 <input type="text" placeholder="Enter username" name="username" required><br>
                 <input type="password" placeholder="Enter Password" name="password" required><br>

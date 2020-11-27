@@ -6,13 +6,17 @@ import org.la.ecom.document.api.client.DocumentClient;
 import org.la.ecom.mysql.api.client.MysqlClient;
 import org.la.ecom.notification.api.client.NotificationClient;
 import org.la.ecom.report.api.client.ReportClient;
+import org.la.ecom.secure.api.client.SecurityClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ApiServiceDocument {
+public class ApiServicePortalTeacher {
 
+	@Value("${service.url.security}")
+	private String securityURL;
+	
 	@Value("${service.url.notifications}")
 	private String notificationURL;
 	
@@ -26,6 +30,9 @@ public class ApiServiceDocument {
 	private String reportURL;
 
 	@Autowired
+	private SecurityClient securityClient;
+	
+	@Autowired
 	private NotificationClient notificationClient;
 	
 	@Autowired
@@ -37,10 +44,14 @@ public class ApiServiceDocument {
 	@Autowired
 	private ReportClient reportClient;
 	
-	public ApiServiceDocument() {}
+	public ApiServicePortalTeacher() {}
 	
 	public NotificationClient notificationClient() {
 		return notificationClient;
+	}
+	
+	public SecurityClient securityClient() {
+		return securityClient;
 	}
 	
 	public MysqlClient mysqlClient() {
@@ -61,6 +72,7 @@ public class ApiServiceDocument {
 		mysqlClient.setUrl(mysqlURL);
 		documentClient.setUrl(documentURL);
 		reportClient.setUrl(reportURL);
+		securityClient.setUrl(securityURL);
 	}
 	
 	

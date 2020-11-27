@@ -8,6 +8,7 @@ import org.la.ecom.mysql.api.client.MysqlClient;
 import org.la.ecom.notification.api.client.NotificationClient;
 import org.la.ecom.portal.teacher.rest.template.interceptor.RestTemplateInterceptor;
 import org.la.ecom.report.api.client.ReportClient;
+import org.la.ecom.secure.api.client.SecurityClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +17,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.client.RestTemplate;
 
 @Configuration
-public class AppDocumentConfiguration {
+public class AppPortalTeacherConfiguration {
 
 	@Autowired
 	private RestTemplateInterceptor restTemplateInterceptor;
@@ -55,6 +56,11 @@ public class AppDocumentConfiguration {
 	@Bean
 	public ReportClient reportClient() {
 		return new ReportClient();
+	}
+	
+	@Bean
+	public SecurityClient securityClient() {
+		return new SecurityClient();
 	}
 
 }
