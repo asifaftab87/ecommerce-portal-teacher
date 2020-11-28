@@ -96,7 +96,7 @@
             </div>
         </form>
         <div class="container" style="background-color:#f1f1f1">
-            <form action="/singup" method="get">
+            <form action="registration" method="get">
                 <label>Don't have an account?</label><br><br>
                 <input type="submit" class="signup" value="Signup" />
             </form>

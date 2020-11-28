@@ -78,6 +78,12 @@ public class JwtRequestFilter extends OncePerRequestFilter{
 					filterChain.doFilter(request, response);
 					return;
 				}
+				else if(uri.contains(".css") || uri.contains(".js") || uri.contains(".woff2")
+						|| uri.contains(".woff2") || uri.contains(".woff") || uri.contains(".ttf")
+						|| uri.contains(".ico")) {
+					filterChain.doFilter(request, response);
+					return;
+				}
 			}
 		}
 		

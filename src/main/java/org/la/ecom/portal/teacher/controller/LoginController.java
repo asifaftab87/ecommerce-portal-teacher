@@ -1,12 +1,19 @@
 package org.la.ecom.portal.teacher.controller;
 
 import java.net.URISyntaxException;
-import java.security.Principal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashSet;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.la.ecom.mysql.api.dto.AuthenticationRequestDTO;
 import org.la.ecom.mysql.api.dto.AuthenticationResponseDTO;
+import org.la.ecom.mysql.api.dto.RoleDTO;
 import org.la.ecom.mysql.api.dto.UserDTO;
 import org.la.ecom.portal.teacher.client.service.ApiServicePortalTeacher;
 import org.slf4j.Logger;
@@ -34,61 +41,22 @@ public class LoginController {
 	@GetMapping("/login")
 	public ModelAndView loginTest(@ModelAttribute AuthenticationRequestDTO authRequest) {
 
-		boolean authenticated2 = isAuthenticated();
-		log.info("auhten: "+authenticated2);
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if(authentication!=null) {
-			boolean authenticated = authentication.isAuthenticated();
-			if(authenticated) {
-				Object obj = authentication.getPrincipal();
-				if(obj!=null && obj instanceof Principal) {
-					Principal principal = (Principal)obj;
-					if(principal!=null) {
-						String name = principal.getName();
-						log.info(name);
-					}
-				}
-				log.info(""+authentication.getClass());
-				if(!(authentication instanceof AnonymousAuthenticationToken) ) {
-					return new ModelAndView("redirect:/welcome", "authRequest", authRequest);
-				}
-			}
-			log.info(authenticated+"");
-		}
-		
-		log.info("test login unsecure");
-
 		ModelAndView mav = new ModelAndView("login");
 		mav.addObject(authRequest);
 		return mav;
 	}
 	
-	private boolean isAuthenticated() {
-	    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    if (authentication == null || AnonymousAuthenticationToken.class.
-	      isAssignableFrom(authentication.getClass())) {
-	        return false;
-	    }
-	    return authentication.isAuthenticated();
-	}
-	
 	@GetMapping("/registration")
-	public ModelAndView registrationTest() {
-
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if(authentication!=null) {
-			boolean authenticated = authentication.isAuthenticated();
-			log.info(authenticated+"");
-		}
-		log.info("test registration unsecure");
+	public ModelAndView registrationTest(HttpServletRequest req, HttpServletResponse res, 
+			@ModelAttribute UserDTO userDto) {
 
 		ModelAndView mav = new ModelAndView("registration");
-
+		mav.addObject(userDto);
 		return mav;
 	}
 	
 	@PostMapping("/login")
-	public ModelAndView login(HttpServletRequest req,@ModelAttribute AuthenticationRequestDTO authRequest) {
+	public ModelAndView login(HttpServletRequest req, @ModelAttribute AuthenticationRequestDTO authRequest) {
 
 		log.info("username: " + authRequest.getUsername());
 
@@ -152,11 +120,35 @@ public class LoginController {
 
 		log.info("email: " + user.getEmail());
 
-		ModelAndView mav = new ModelAndView("success");
+		String dobString = user.getDobString();
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+		Date parse = null;
+		
+		try {
+			parse = df.parse(dobString);
+			
+			String roleName = user.getRoleName();
+			RoleDTO role = new RoleDTO();
+			role.setRole(roleName);
+			user.setRoles(new HashSet<>(Arrays.asList(role)));
+			user.setDob(parse);
+			user.setStatus(1);
+			user.setActive(true);
+			
+			user = apiService.securityClient().postForObject("/registration", user, UserDTO.class);
+			
+		} catch (ParseException e) {
+			log.error(e.getMessage());
+		}
+		catch (Exception e) {
+			log.error(e.getMessage());
+		}
+		
+		ModelAndView mav = new ModelAndView("login");
 
 		return mav;
 	}
-	
+
 	@RequestMapping("/hello")
 	public ModelAndView hello() {
 		
