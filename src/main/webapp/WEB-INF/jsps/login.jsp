@@ -1,106 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <!DOCTYPE html>
-    <html>
 
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-            body {
-                font-family: Arial, Helvetica, sans-serif;
-            }
-            
-            form {
-                border: 3px solid #f1f1f1;
-            }
-            
-            input[type=text],
-            input[type=password] {
-                width: 40%;
-                padding: 12px 20px;
-                margin: 8px 0;
-                display: inline-block;
-                border: 1px solid #ccc;
-                box-sizing: border-box;
-            }
-            
-            button {
-                background-color: #4CAF50;
-                color: white;
-                padding: 14px 20px;
-                margin: 8px 0;
-                border: none;
-                cursor: pointer;
-                width: 40%;
-            }
-            
-            button:hover {
-                opacity: 0.8;
-            }
-            
-            .signup {
-                width: auto;
-                padding: 10px 18px;
-                background-color: #4CAF50;
-                color: white;
-                border: none;
-            }
-            
-            input[type=submit]:hover {
-                opacity: 0.8;
-            }
-            
-            .imgcontainer {
-                text-align: center;
-                margin: 20px 0 1px 0;
-            }
-            
-            img.pic {
-                width: 40%;
-                border-radius: 50%;
-            }
-            
-            .container {
-                padding: 16px;
-            }
-            
-            span.psw {
-                float: right;
-                padding-top: 16px;
-            }
-            /* Change styles for span and signup button on extra small screens */
-            
-            @media screen and (max-width: 300px) {
-                span.psw {
-                    display: block;
-                    float: none;
-                }
-                .signup {
-                    width: 40%;
-                }
-            }
-            
-            .div2 {
-                text-align: center;
-            }
-        </style>
-    </head>
+<div class="container mb-4">
+	<form action="/teacher/login" method="post" modelAttribute="userDto">
 
-    <body>
-        <h2 style="text-align:center">Log-in</h2>
-        <form action="/teacher/login" method="post" modelAttribute="authRequest">
-            <div class="div2">
-                <input type="text" placeholder="Enter username" name="username" required><br>
-                <input type="password" placeholder="Enter Password" name="password" required><br>
-                <button type="submit">Login</button><br>
-            </div>
-        </form>
-        <div class="container" style="background-color:#f1f1f1">
-            <form action="registration" method="get">
-                <label>Don't have an account?</label><br><br>
-                <input type="submit" class="signup" value="Signup" />
-            </form>
-        </div>
-    </body>
+		<p class="h4 mb-4 text-center mt-4">Login</p>
 
-    </html>
+		<div class="container border">
+
+			<div class="form-group">
+				<label for="email">Email</label> <input type="email"
+					class="form-control" id="username" placeholder="Enter Email"
+					name="username">
+			</div>
+
+			<div class="form-group">
+				<label for="password">Password</label> <input type="password"
+					class="form-control" id="password" placeholder="Password"
+					name="password">
+			</div>
+
+			<div class="form-group mt-3">
+				<button type="submit" class="btn btn-primary">Login</button>
+			</div>
+		</div>
+	</form>
+</div>
+
+<a class="btn btn-primary ml-5"
+		href="/teacher/registration" role="button"> Don't have an account? </a>
+
+	

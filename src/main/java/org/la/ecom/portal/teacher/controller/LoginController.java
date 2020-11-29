@@ -73,7 +73,7 @@ public class LoginController {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		return new ModelAndView("redirect:/test", "authRequest", authRequest);
+		return new ModelAndView("redirect:/welcome", "authRequest", authRequest);
 	}
 	
 	@GetMapping("/welcome")

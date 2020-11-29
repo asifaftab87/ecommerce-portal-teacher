@@ -1,12 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-	<h2>Welcome</h2>
-</body>
-</html>
+
+<h2>Welcome</h2>
+
+<div class="modal-body">
+	<object id="pdfUrl" width="100%" height="500px" />
+</div>
+
+<button onclick="documentPopup('/teacher/report/test')">Click</button>
