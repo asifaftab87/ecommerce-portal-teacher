@@ -18,7 +18,7 @@
 	
 	<definition name="privateLayout"
 		template="/WEB-INF/tiles/private-layout.jsp">
-		<put-attribute name="title" value="Public layout Page" />
+		<put-attribute name="title" value="Private layout Page" />
 		<put-attribute name="header"
 			value="/WEB-INF/tiles/header.jsp" />
 		<put-attribute name="body" value="" />
@@ -39,6 +39,11 @@
 	<definition name="welcome" extends="privateLayout">
 		<put-attribute name="body"
 			value="/WEB-INF/jsps/welcome.jsp" />
+	</definition>
+	
+	<definition name="upload_document" extends="privateLayout">
+		<put-attribute name="body"
+			value="/WEB-INF/jsps/upload-document.jsp" />
 	</definition>
 
 </tiles-definitions>

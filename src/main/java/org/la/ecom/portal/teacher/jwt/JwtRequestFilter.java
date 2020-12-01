@@ -9,13 +9,14 @@ import java.util.Set;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 
 import org.la.ecom.portal.teacher.rest.template.interceptor.RestTemplateInterceptor;
+import org.la.ecom.portal.teacher.wrapper.CustomHttpServletRequestWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,8 +42,6 @@ public class JwtRequestFilter extends OncePerRequestFilter{
 			throws ServletException, IOException {
 	
 		String jwt = null;
-		
-		log.info("jwt: "+jwt);
 		
 		//getting jwt from session
 		Object obj = request.getSession().getAttribute("jwt");
@@ -88,7 +87,10 @@ public class JwtRequestFilter extends OncePerRequestFilter{
 		}
 		
 		if(jwt==null) {
-			throw new AccessDeniedException("Forbidden");
+			//if user try to access any secure url then redirecting to login page
+			HttpServletRequestWrapper reqWrapper = new CustomHttpServletRequestWrapper(request);
+			filterChain.doFilter(reqWrapper, response);
+			return;
 		}
 		
 		if(jwt!=null) {

@@ -59,7 +59,7 @@ public class LoginController {
 	public ModelAndView login(HttpServletRequest req, @ModelAttribute AuthenticationRequestDTO authRequest) {
 
 		log.info("username: " + authRequest.getUsername());
-
+		ModelAndView mav = new ModelAndView("login");
 		AuthenticationResponseDTO authenticationResponseDTO = null;
 		try {
 			authenticationResponseDTO = 
@@ -68,12 +68,16 @@ public class LoginController {
 			String jwt = authenticationResponseDTO.getJwt();
 			req.getSession().setAttribute("jwt", jwt);
 			
+			mav.setViewName("welcome");
+			mav.addObject("authRequest", authRequest);
+			return mav;
+			
 		} catch (RestClientException e) {
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		return new ModelAndView("redirect:/welcome", "authRequest", authRequest);
+		return mav;
 	}
 	
 	@GetMapping("/welcome")

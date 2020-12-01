@@ -1,4 +1,4 @@
-package org.la.ecom.portal.teacher.resport.controller;
+package org.la.ecom.portal.teacher.report.controller;
 
 import java.net.URISyntaxException;
 import java.util.Date;
